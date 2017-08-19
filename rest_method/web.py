@@ -1,8 +1,9 @@
 # coding: utf-8
+import json
 
-import tornado.gen
 import tornado.ioloop
 import tornado.web
+import tornado.gen
 from pg8000 import InterfaceError
 
 from rest_method.db import init_db, User, DB
@@ -60,12 +61,14 @@ class BenefitHandler(BaseHandler):
             a = int(self.get_argument('a')) or 1
             b = int(self.get_argument('b')) or 1
             c = int(self.get_argument('c')) or 1
+            params = json.loads(self.get_argument('params', '{}')) or {}
         except ValueError:
             raise tornado.web.HTTPError(status_code=400,
                                         reason='Params error')
 
         self.set_header("Content-Type", "application/json; charset=UTF-8")
-        res = await method.method(self.current_user, benefit_type, *(a, b, c))
+        res = await method.method(self.current_user,
+                                  benefit_type, *(a, b, c), **params)
         print(self.current_user, res)
         self.write(str(res))
         self.finish()
