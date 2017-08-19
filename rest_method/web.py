@@ -1,12 +1,12 @@
 # coding: utf-8
 
+import tornado.gen
 import tornado.ioloop
 import tornado.web
-import tornado.gen
 from pg8000 import InterfaceError
 
+from rest_method.db import init_db, User, DB
 from rest_method.method_lib import method
-from rest_method.method_lib.db import init_db, User, DB
 
 
 class Application(tornado.web.Application):
@@ -66,7 +66,7 @@ class BenefitHandler(BaseHandler):
 
         self.set_header("Content-Type", "application/json; charset=UTF-8")
         res = await method.method(self.current_user, benefit_type, *(a, b, c))
-        print(res)
+        print(self.current_user, res)
         self.write(str(res))
         self.finish()
 
