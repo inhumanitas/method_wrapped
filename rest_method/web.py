@@ -1,4 +1,5 @@
 # coding: utf-8
+import json
 
 import tornado.ioloop
 import tornado.web
@@ -60,12 +61,14 @@ class BenefitHandler(BaseHandler):
             a = int(self.get_argument('a')) or 1
             b = int(self.get_argument('b')) or 1
             c = int(self.get_argument('c')) or 1
+            params = json.loads(self.get_argument('params', '{}')) or {}
         except ValueError:
             raise tornado.web.HTTPError(status_code=400,
                                         reason='Params error')
 
         self.set_header("Content-Type", "application/json; charset=UTF-8")
-        res = await method.method(self.current_user, benefit_type, *(a, b, c))
+        res = await method.method(self.current_user,
+                                  benefit_type, *(a, b, c), **params)
         print(res)
         self.write(str(res))
         self.finish()
