@@ -1,0 +1,2 @@
+curl localhost:8888/login -X POST -c /tmp/cookie.txt  -H "Content-Type: application/x-www-form-urlencoded" -d 'login=test1&password=pass1' && \
+ curl localhost:8888/calc -X POST -b /tmp/cookie.txt  -H "Content-Type: application/x-www-form-urlencoded" -d 'benefitType=1&a=2&b=1&c=3&params={"d":4}'
