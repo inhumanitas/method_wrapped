@@ -4,7 +4,6 @@ import json
 import tornado.ioloop
 import tornado.web
 import tornado.gen
-from pg8000 import InterfaceError
 
 from rest_method.db import init_db, User, DB
 from rest_method.method_lib import method
@@ -96,11 +95,7 @@ def make_app():
 
 
 def main():
-    try:
-        init_db()
-    except InterfaceError:
-        print('Check DB connection')
-        return
+    init_db()
 
     app = make_app()
     app.listen(8888)

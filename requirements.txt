@@ -1,4 +1,2 @@
 tornado
-py-postgresql
 sqlalchemy
-pg8000
