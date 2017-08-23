@@ -56,19 +56,12 @@ class BenefitHandler(BaseHandler):
     @tornado.web.asynchronous
     async def post(self, *args, **kwargs):
         try:
-            benefit_type = int(self.get_argument('benefitType'))
-            a = int(self.get_argument('a')) or 1
-            b = int(self.get_argument('b')) or 1
-            c = int(self.get_argument('c')) or 1
             params = json.loads(self.get_argument('params', '{}')) or {}
         except ValueError:
-            raise tornado.web.HTTPError(status_code=400,
-                                        reason='Params error')
-
-        self.set_header("Content-Type", "application/json; charset=UTF-8")
-        res = await method.method(self.current_user,
-                                  benefit_type, *(a, b, c), **params)
+            raise tornado.web.HTTPError(status_code=400, reason='Params error')
+        res = await method.method(self.current_user, **params)
         print(self.current_user, res)
+        self.set_header("Content-Type", "application/json; charset=UTF-8")
         self.write(str(res))
         self.finish()
 
@@ -99,6 +92,7 @@ def main():
 
     app = make_app()
     app.listen(8888)
+    print('started')
     tornado.ioloop.IOLoop.current().start()
 
 if __name__ == "__main__":
