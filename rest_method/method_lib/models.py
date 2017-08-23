@@ -3,7 +3,7 @@
 
 class BaseModel:
 
-    def calc(self, benefit_type, *args, **kwargs):
+    def calc(self, **kwargs):
         raise NotImplemented()
 
     @property
@@ -12,44 +12,56 @@ class BaseModel:
 
 
 class BaseModel1(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return (a + b + c) * benefit_type
 
 
 class BaseModel2(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return (a + b) * benefit_type
 
 
 class BaseModel3(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return (b + c) * benefit_type
 
 
 class BaseModel4(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return a * benefit_type
 
 
 class BaseModel5(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return b + c
 
 
 class BaseModel6(BaseModel):
-    def calc(self, benefit_type, *args, **kwargs):
-        assert len(args) >= 3
-        a, b, c, *o = args
+    def calc(self, **kwargs):
+        benefit_type = kwargs.get('benefitType', 0)
+        a = kwargs.get('a', 0)
+        b = kwargs.get('b', 0)
+        c = kwargs.get('c', 0)
         return c * benefit_type
 
 
