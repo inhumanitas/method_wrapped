@@ -68,8 +68,11 @@ metadata = Base.metadata
 
 
 def create_all():
-    Roles.__table__.drop(engine)
-    User.__table__.drop(engine)
+    try:
+        Roles.__table__.drop(engine)
+        User.__table__.drop(engine)
+    except Exception:
+        pass
     metadata.create_all(engine)
 
 
